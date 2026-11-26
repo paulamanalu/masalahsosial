@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LKPD Sosiologi Kelas XI – Detektif Masalah Sosial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-page: #f0f4f8;
+      --cream: #fffdf5;
+      --pastel-blue: #e3f2fd;
+      --pastel-blue-border: #90caf9;
+      --pastel-mint: #e0f7ec;
+      --pastel-mint-border: #80cbc4;
+      --pastel-yellow: #fff8d6;
+      --pastel-yellow-border: #ffd54f;
+      --pastel-pink: #fde8ef;
+      --pastel-pink-border: #f48fb1;
+      --pastel-lavender: #f1e9ff;
+      --pastel-lavender-border: #b39ddb;
+      --pastel-peach: #fff0e3;
+      --pastel-peach-border: #ffab91;
+      --ink: #263238;
+      --ink-soft: #455a64;
+      --accent-navy: #1e3a5f;
+      --line-color: #90a4ae;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: var(--bg-page);
+      color: var(--ink);
+      line-height: 1.35;
+      padding: 18px 12px 40px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Toolbar mengambang (tidak ikut tercetak) */
+    .toolbar {
+      max-width: 210mm;
+      margin: 0 auto 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      background: #ffffff;
+      padding: 10px 16px;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(30, 58, 95, 0.08);
+      border: 1px solid #dbe4ee;
+    }
+
+    .toolbar-info {
+      font-size: 13px;
+      color: var(--ink-soft);
+      font-weight: 700;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.94;
+    }
+
+    .btn-print {
+      background: var(--accent-navy);
+      color: #ffffff;
+    }
+
+    .btn-reset {
+      background: var(--pastel-pink);
+      color: #880e4f;
+      border: 1px solid var(--pastel-pink-border);
+    }
+
+    /* Kanvas A4 Portrait */
+    .a4-sheet {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: var(--cream);
+      border-radius: 18px;
+      padding: 9mm 9.5mm;
+      box-shadow: 0 12px 36px rgba(30, 58, 95, 0.14);
+      border: 2px solid #e0e7ef;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    h1, h2, h3, .badge-num {
+      font-family: 'Fredoka', 'Nunito', sans-serif;
+    }
+
+    /* HEADER POSTER */
+    .poster-header {
+      background: linear-gradient(135deg, #dff1ff 0%, #fff7d1 55%, #fde7ef 100%);
+      border: 2.5px solid var(--pastel-blue-border);
+      border-radius: 16px;
+      padding: 10px 14px;
+      display: grid;
+      grid-template-columns: 74px 1fr 185px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 4px;
+    }
+
+    .pill {
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--accent-navy);
+      border: 1.5px solid #b6d4f2;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .poster-title {
+      font-size: 24px;
+      line-height: 1.05;
+      color: var(--accent-navy);
+      letter-spacing: 0.4px;
+      text-shadow: 1.5px 1.5px 0 #ffffff;
+    }
+
+    .poster-subtitle {
+      font-size: 11px;
+      font-weight: 700;
+      color: #37474f;
+      margin-top: 2px;
+    }
+
+    .activity-tags {
+      font-size: 9px;
+      color: #455a64;
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    .tujuan-box {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1.8px dashed var(--pastel-mint-border);
+      border-radius: 12px;
+      padding: 6px 8px;
+    }
+
+    .tujuan-box h3 {
+      font-size: 10.5px;
+      color: #00695c;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .tujuan-box ol {
+      padding-left: 13px;
+      font-size: 8.4px;
+      line-height: 1.28;
+      color: var(--ink);
+    }
+
+    /* KARTU BAGIAN UMUM */
+    .card {
+      border-radius: 14px;
+      padding: 8px 10px;
+      border: 2px solid #cfd8dc;
+      background: #ffffff;
+    }
+
+    .card-blue { background: var(--pastel-blue); border-color: var(--pastel-blue-border); }
+    .card-mint { background: var(--pastel-mint); border-color: var(--pastel-mint-border); }
+    .card-yellow { background: var(--pastel-yellow); border-color: var(--pastel-yellow-border); }
+    .card-pink { background: var(--pastel-pink); border-color: var(--pastel-pink-border); }
+    .card-lavender { background: var(--pastel-lavender); border-color: var(--pastel-lavender-border); }
+    .card-peach { background: var(--pastel-peach); border-color: var(--pastel-peach-border); }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 6px;
+    }
+
+    .badge-num {
+      background: var(--accent-navy);
+      color: #ffffff;
+      font-size: 10.5px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .section-title {
+      font-size: 12.5px;
+      color: var(--accent-navy);
+      line-height: 1.15;
+    }
+
+    .section-icon {
+      width: 22px;
+      height: 2

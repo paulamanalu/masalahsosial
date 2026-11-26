@@ -4,237 +4,1035 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LKPD Sosiologi Kelas XI – Detektif Masalah Sosial</title>
+
+  <!-- Google Fonts: Fredoka (Judul Tebal) & Nunito (Isi Jelas & Mudah Dibaca) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg-page: #f0f4f8;
-      --cream: #fffdf5;
-      --pastel-blue: #e3f2fd;
-      --pastel-blue-border: #90caf9;
-      --pastel-mint: #e0f7ec;
-      --pastel-mint-border: #80cbc4;
-      --pastel-yellow: #fff8d6;
-      --pastel-yellow-border: #ffd54f;
-      --pastel-pink: #fde8ef;
-      --pastel-pink-border: #f48fb1;
-      --pastel-lavender: #f1e9ff;
-      --pastel-lavender-border: #b39ddb;
-      --pastel-peach: #fff0e3;
-      --pastel-peach-border: #ffab91;
-      --ink: #263238;
-      --ink-soft: #455a64;
-      --accent-navy: #1e3a5f;
-      --line-color: #90a4ae;
-    }
 
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Fredoka', 'Nunito', 'sans-serif'],
+            sans: ['Nunito', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            cream: '#fffdf5',
+            navy: '#1e3a5f',
+            pblue: '#e3f2fd',
+            pblueb: '#90caf9',
+            pmint: '#e0f7ec',
+            pmintb: '#80cbc4',
+            pyellow: '#fff8d6',
+            pyellowb: '#ffd54f',
+            ppink: '#fde8ef',
+            ppinkb: '#f48fb1',
+            plavender: '#f1e9ff',
+            plavenderb: '#b39ddb',
+            ppeach: '#fff0e3',
+            ppeachb: '#ffab91',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Memastikan warna pastel tercetak dengan akurat */
     * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
     }
 
     body {
-      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background-color: var(--bg-page);
-      color: var(--ink);
-      line-height: 1.35;
-      padding: 18px 12px 40px;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-
-    /* Toolbar mengambang (tidak ikut tercetak) */
-    .toolbar {
-      max-width: 210mm;
-      margin: 0 auto 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      background: #ffffff;
-      padding: 10px 16px;
-      border-radius: 14px;
-      box-shadow: 0 4px 14px rgba(30, 58, 95, 0.08);
-      border: 1px solid #dbe4ee;
-    }
-
-    .toolbar-info {
-      font-size: 13px;
-      color: var(--ink-soft);
-      font-weight: 700;
-    }
-
-    .toolbar-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn {
       font-family: 'Nunito', sans-serif;
-      font-size: 13px;
-      font-weight: 800;
-      padding: 8px 14px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: transform 0.12s ease, opacity 0.12s ease;
+      background-color: #eef3f8;
+      color: #263238;
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      opacity: 0.94;
-    }
-
-    .btn-print {
-      background: var(--accent-navy);
-      color: #ffffff;
-    }
-
-    .btn-reset {
-      background: var(--pastel-pink);
-      color: #880e4f;
-      border: 1px solid var(--pastel-pink-border);
-    }
-
-    /* Kanvas A4 Portrait */
-    .a4-sheet {
-      width: 210mm;
+    /* Kanvas A4 Portrait pada layar desktop */
+    .a4-canvas {
+      width: 100%;
+      max-width: 210mm;
       min-height: 297mm;
-      margin: 0 auto;
-      background: var(--cream);
-      border-radius: 18px;
-      padding: 9mm 9.5mm;
-      box-shadow: 0 12px 36px rgba(30, 58, 95, 0.14);
-      border: 2px solid #e0e7ef;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
+      background-color: #fffdf5;
     }
 
-    h1, h2, h3, .badge-num {
-      font-family: 'Fredoka', 'Nunito', sans-serif;
-    }
-
-    /* HEADER POSTER */
-    .poster-header {
-      background: linear-gradient(135deg, #dff1ff 0%, #fff7d1 55%, #fde7ef 100%);
-      border: 2.5px solid var(--pastel-blue-border);
-      border-radius: 16px;
-      padding: 10px 14px;
-      display: grid;
-      grid-template-columns: 74px 1fr 185px;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .header-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-bottom: 4px;
-    }
-
-    .pill {
-      font-size: 9.5px;
-      font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #ffffff;
-      color: var(--accent-navy);
-      border: 1.5px solid #b6d4f2;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-
-    .poster-title {
-      font-size: 24px;
-      line-height: 1.05;
-      color: var(--accent-navy);
-      letter-spacing: 0.4px;
-      text-shadow: 1.5px 1.5px 0 #ffffff;
-    }
-
-    .poster-subtitle {
-      font-size: 11px;
-      font-weight: 700;
-      color: #37474f;
-      margin-top: 2px;
-    }
-
-    .activity-tags {
-      font-size: 9px;
-      color: #455a64;
-      margin-top: 4px;
-      font-weight: 700;
-    }
-
-    .tujuan-box {
-      background: rgba(255, 255, 255, 0.9);
-      border: 1.8px dashed var(--pastel-mint-border);
-      border-radius: 12px;
-      padding: 6px 8px;
-    }
-
-    .tujuan-box h3 {
+    /* Ruang jawaban bergaris (nyaman ditulis tangan saat dicetak & diketik langsung) */
+    .lined-textarea {
+      width: 100%;
+      background-color: #ffffff;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 18px,
+        #cbd5e1 18px,
+        #cbd5e1 19px
+      );
+      background-position: 0 3px;
+      line-height: 19px;
       font-size: 10.5px;
-      color: #00695c;
-      margin-bottom: 3px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
+      color: #1e3a5f;
+      resize: none;
+      outline: none;
     }
 
-    .tujuan-box ol {
-      padding-left: 13px;
-      font-size: 8.4px;
-      line-height: 1.28;
-      color: var(--ink);
+    .lined-textarea:focus {
+      box-shadow: 0 0 0 2px rgba(30, 58, 95, 0.25);
     }
 
-    /* KARTU BAGIAN UMUM */
-    .card {
-      border-radius: 14px;
-      padding: 8px 10px;
-      border: 2px solid #cfd8dc;
-      background: #ffffff;
+    /* Garis tulis titik-titik sebaris */
+    .dotted-input {
+      border: none;
+      border-bottom: 1.5px dotted #78909c;
+      background: transparent;
+      color: #1e3a5f;
+      font-weight: 700;
+      outline: none;
+      padding: 1px 4px;
     }
 
-    .card-blue { background: var(--pastel-blue); border-color: var(--pastel-blue-border); }
-    .card-mint { background: var(--pastel-mint); border-color: var(--pastel-mint-border); }
-    .card-yellow { background: var(--pastel-yellow); border-color: var(--pastel-yellow-border); }
-    .card-pink { background: var(--pastel-pink); border-color: var(--pastel-pink-border); }
-    .card-lavender { background: var(--pastel-lavender); border-color: var(--pastel-lavender-border); }
-    .card-peach { background: var(--pastel-peach); border-color: var(--pastel-peach-border); }
-
-    .section-head {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      margin-bottom: 6px;
+    .dotted-input:focus {
+      border-bottom-color: #1e3a5f;
+      background-color: rgba(255, 255, 255, 0.75);
+      border-radius: 4px 4px 0 0;
     }
 
-    .badge-num {
-      background: var(--accent-navy);
-      color: #ffffff;
-      font-size: 10.5px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      white-space: nowrap;
+    /* Efek kartu kasus terpilih */
+    .case-card-active {
+      border-color: #1e3a5f !important;
+      box-shadow: 0 0 0 2px rgba(30, 58, 95, 0.2);
+      background-color: #fffdf7 !important;
     }
 
-    .section-title {
-      font-size: 12.5px;
-      color: var(--accent-navy);
-      line-height: 1.15;
+    /* Pengaturan Cetak A4 Portrait */
+    @page {
+      size: A4 portrait;
+      margin: 6mm;
     }
 
-    .section-icon {
-      width: 22px;
-      height: 2
+    @media print {
+      body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .a4-canvas {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+      }
+
+      .avoid-break {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body class="py-4 px-2 sm:px-4 pb-12">
+
+  <!-- ===================================================================== -->
+  <!-- TOOLBAR MENGAMBANG (Disembunyikan saat dicetak)                       -->
+  <!-- ===================================================================== -->
+  <div class="no-print sticky top-2 z-40 max-w-[210mm] mx-auto mb-4">
+    <div class="bg-white/95 backdrop-blur border border-slate-200 shadow-lg rounded-2xl px-4 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5 text-center sm:text-left">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-pblue text-navy text-base font-bold">🔍</span>
+        <div>
+          <p class="font-display font-semibold text-sm text-navy leading-tight">LKPD Interaktif &amp; Siap Cetak (A4 Portrait)</p>
+          <p id="saveStatus" class="text-[11px] font-bold text-emerald-700">✓ Siap diisi • Tersimpan otomatis di browser</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        <button
+          type="button"
+          id="btnDownload"
+          class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5 cursor-pointer"
+          title="Unduh file index.html untuk diunggah ke GitHub Pages"
+        >
+          <span>⬇️</span> Unduh index.html
+        </button>
+
+        <button
+          type="button"
+          id="btnPrint"
+          class="px-3.5 py-2 rounded-xl bg-navy hover:bg-slate-800 active:scale-95 text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5 cursor-pointer"
+          title="Cetak atau Simpan sebagai PDF ukuran A4 Portrait"
+        >
+          <span>🖨️</span> Cetak / Simpan PDF
+        </button>
+
+        <button
+          type="button"
+          id="btnReset"
+          class="px-3.5 py-2 rounded-xl bg-ppink hover:bg-pink-200 active:scale-95 text-pink-900 border border-ppinkb font-bold text-xs shadow-sm transition flex items-center gap-1.5 cursor-pointer"
+          title="Hapus semua jawaban yang telah diisi"
+        >
+          <span>🔄</span> Reset Jawaban
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- KANVAS POSTER LKPD A4 PORTRAIT                                        -->
+  <!-- ===================================================================== -->
+  <main id="lkpdForm" class="a4-canvas mx-auto rounded-2xl shadow-xl border-2 border-slate-200/90 p-3 sm:p-5 flex flex-col gap-2.5">
+
+    <!-- =================================================================== -->
+    <!-- HEADER INFOGRAFIS & TUJUAN PEMBELAJARAN                             -->
+    <!-- =================================================================== -->
+    <header class="avoid-break rounded-2xl border-2 border-pblueb p-3 sm:p-3.5 bg-gradient-to-br from-[#dff1ff] via-[#fff7d1] to-[#fde7ef] grid grid-cols-1 md:grid-cols-[78px_1fr_200px] gap-3 items-center">
+      <!-- Ilustrasi Kartun Detektif & Kaca Pembesar -->
+      <div class="flex justify-center">
+        <svg viewBox="0 0 100 100" class="w-[76px] h-[76px] drop-shadow-sm" aria-label="Ilustrasi Detektif dengan Kaca Pembesar">
+          <circle cx="50" cy="50" r="46" fill="#ffffff" stroke="#90caf9" stroke-width="3" />
+          <!-- Topi Detektif -->
+          <ellipse cx="47" cy="30" rx="26" ry="7" fill="#d7a86e" stroke="#5d4037" stroke-width="2" />
+          <path d="M28 29 C31 13, 63 13, 66 29 Z" fill="#e6be8a" stroke="#5d4037" stroke-width="2" />
+          <rect x="30" y="25" width="34" height="4" rx="2" fill="#5d4037" />
+          <!-- Wajah Detektif -->
+          <circle cx="47" cy="48" r="17" fill="#ffe0bd" stroke="#5d4037" stroke-width="2" />
+          <circle cx="41" cy="46" r="2.2" fill="#263238" />
+          <circle cx="53" cy="46" r="2.2" fill="#263238" />
+          <circle cx="37" cy="51" r="2.2" fill="#f48fb1" opacity="0.55" />
+          <circle cx="57" cy="51" r="2.2" fill="#f48fb1" opacity="0.55" />
+          <path d="M42 54 Q47 59 52 54" fill="none" stroke="#5d4037" stroke-width="2" stroke-linecap="round" />
+          <!-- Jas & Dasi -->
+          <path d="M26 83 C28 66, 66 66, 68 83 Z" fill="#1e3a5f" stroke="#102027" stroke-width="2" />
+          <polygon points="47,66 42,75 47,81 52,75" fill="#ffd54f" />
+          <!-- Kaca Pembesar -->
+          <circle cx="74" cy="60" r="12" fill="#e1f5fe" stroke="#1e3a5f" stroke-width="3" />
+          <path d="M69 56 Q72 52 77 54" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" />
+          <line x1="82" y1="69" x2="91" y2="79" stroke="#5d4037" stroke-width="5" stroke-linecap="round" />
+        </svg>
+      </div>
+
+      <!-- Judul & Identitas Mapel -->
+      <div class="text-center md:text-left">
+        <div class="flex flex-wrap justify-center md:justify-start gap-1.5 mb-1">
+          <span class="px-2 py-0.5 rounded-full bg-white border border-pblueb text-navy text-[9.5px] font-extrabold uppercase tracking-wide">Sosiologi</span>
+          <span class="px-2 py-0.5 rounded-full bg-white border border-pblueb text-navy text-[9.5px] font-extrabold uppercase tracking-wide">SMA/MA</span>
+          <span class="px-2 py-0.5 rounded-full bg-white border border-pblueb text-navy text-[9.5px] font-extrabold uppercase tracking-wide">Kelas XI</span>
+          <span class="px-2 py-0.5 rounded-full bg-white border border-pyellowb text-amber-900 text-[9.5px] font-extrabold uppercase tracking-wide">Materi: Masalah Sosial</span>
+        </div>
+
+        <h1 class="font-display font-bold text-2xl sm:text-[26px] leading-none text-navy tracking-wide drop-shadow-[1.5px_1.5px_0_#ffffff]">
+          DETEKTIF MASALAH SOSIAL
+        </h1>
+        <p class="text-[11.5px] font-bold text-slate-700 mt-1">
+          Menemukan, Menganalisis, dan Menyelesaikan Masalah Sosial
+        </p>
+        <p class="text-[9.5px] font-bold text-slate-600 mt-1">
+          📌 Kegiatan: Diskusi kelompok • Studi kasus • Analisis masalah • Pemecahan masalah • Presentasi
+        </p>
+      </div>
+
+      <!-- Kotak Tujuan Pembelajaran -->
+      <aside class="bg-white/90 border-2 border-dashed border-pmintb rounded-xl p-2">
+        <h3 class="font-display font-semibold text-[10.5px] text-teal-800 mb-1 flex items-center gap-1">
+          <span>🎯</span> Tujuan Pembelajaran
+        </h3>
+        <ol class="list-decimal pl-3.5 text-[8.6px] leading-[1.3] text-slate-700 font-semibold space-y-0.5">
+          <li>Mengidentifikasi berbagai bentuk masalah sosial di lingkungan masyarakat.</li>
+          <li>Menganalisis faktor penyebab terjadinya masalah sosial.</li>
+          <li>Mengidentifikasi pihak-pihak yang terdampak oleh masalah sosial.</li>
+          <li>Menganalisis dampak masalah sosial bagi individu dan masyarakat.</li>
+          <li>Merumuskan solusi untuk mengatasi masalah sosial.</li>
+        </ol>
+      </aside>
+    </header>
+
+    <!-- =================================================================== -->
+    <!-- BAGIAN 1: IDENTITAS KELOMPOK                                        -->
+    <!-- =================================================================== -->
+    <section class="avoid-break rounded-2xl bg-pblue border-2 border-pblueb px-3 py-2">
+      <div class="flex items-center gap-2 mb-1.5">
+        <span class="font-display font-semibold text-[10px] px-2.5 py-0.5 rounded-full bg-navy text-white">BAGIAN 1</span>
+        <h2 class="font-display font-semibold text-[13px] text-navy">IDENTITAS KELOMPOK</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-3 gap-y-1.5 text-[10.5px]">
+        <label class="flex items-baseline gap-1.5 font-bold text-slate-800">
+          <span class="whitespace-nowrap">Nama Kelompok:</span>
+          <input type="text" data-key="nama_kelompok" class="dotted-input flex-1 w-full text-[10.5px]" />
+        </label>
+        <label class="flex items-baseline gap-1.5 font-bold text-slate-800">
+          <span class="whitespace-nowrap">Kelas:</span>
+          <input type="text" data-key="kelas" class="dotted-input flex-1 w-full text-[10.5px]" />
+        </label>
+        <label class="flex items-baseline gap-1.5 font-bold text-slate-800">
+          <span class="whitespace-nowrap">Tanggal Pengerjaan:</span>
+          <input type="text" data-key="tanggal" class="dotted-input flex-1 w-full text-[10.5px]" />
+        </label>
+      </div>
+
+      <div class="mt-1.5">
+        <p class="text-[9.5px] font-extrabold text-navy mb-0.5">Anggota Kelompok (5 orang):</p>
+        <div class="grid grid-cols-1 sm:grid-cols-5 gap-1.5 text-[10px]">
+          <label class="flex items-baseline gap-1 font-bold text-slate-700">1.<input type="text" data-key="anggota_1" placeholder="Nama anggota 1" class="dotted-input flex-1 w-full text-[10px]" /></label>
+          <label class="flex items-baseline gap-1 font-bold text-slate-700">2.<input type="text" data-key="anggota_2" placeholder="Nama anggota 2" class="dotted-input flex-1 w-full text-[10px]" /></label>
+          <label class="flex items-baseline gap-1 font-bold text-slate-700">3.<input type="text" data-key="anggota_3" placeholder="Nama anggota 3" class="dotted-input flex-1 w-full text-[10px]" /></label>
+          <label class="flex items-baseline gap-1 font-bold text-slate-700">4.<input type="text" data-key="anggota_4" placeholder="Nama anggota 4" class="dotted-input flex-1 w-full text-[10px]" /></label>
+          <label class="flex items-baseline gap-1 font-bold text-slate-700">5.<input type="text" data-key="anggota_5" placeholder="Nama anggota 5" class="dotted-input flex-1 w-full text-[10px]" /></label>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- BAGIAN 2: MISI 1 – TEMUKAN MASALAHNYA!                              -->
+    <!-- =================================================================== -->
+    <section class="avoid-break rounded-2xl bg-pyellow border-2 border-pyellowb px-3 py-2">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+        <div class="flex items-center gap-2">
+          <span class="font-display font-semibold text-[10px] px-2.5 py-0.5 rounded-full bg-navy text-white">MISI 1</span>
+          <h2 class="font-display font-semibold text-[13px] text-navy">TEMUKAN MASALAHNYA!</h2>
+        </div>
+        <span class="text-[9.5px] font-bold text-amber-900">Pilih satu kasus sosial di bawah ini untuk dianalisis kelompok kalian!</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+        <!-- Kasus A -->
+        <article
+          class="case-card cursor-pointer bg-white rounded-xl border-2 border-slate-200 hover:border-navy/50 p-2 transition flex flex-col gap-1"
+          data-case="Kasus A: Sekolah yang Tidak Lagi Nyaman"
+          title="Klik untuk memilih Kasus A"
+        >
+          <div class="flex items-center gap-2">
+            <!-- Ilustrasi SVG Kasus A: Bullying di Sekolah -->
+            <svg viewBox="0 0 64 64" class="w-11 h-11 flex-shrink-0" aria-label="Ilustrasi Bullying di Sekolah">
+              <rect width="64" height="64" rx="12" fill="#fde8ef" />
+              <!-- Siswa sedih -->
+              <circle cx="21" cy="25" r="8" fill="#ffe0bd" stroke="#5d4037" stroke-width="1.8" />
+              <path d="M12 49 C13 37, 29 37, 30 49" fill="#90caf9" stroke="#1e3a5f" stroke-width="1.8" />
+              <circle cx="18.5" cy="24" r="1.2" fill="#263238" />
+              <circle cx="23.5" cy="24" r="1.2" fill="#263238" />
+              <path d="M18 29 Q21 26.5 24 29" fill="none" stroke="#5d4037" stroke-width="1.6" stroke-linecap="round" />
+              <!-- Siswa mengejek -->
+              <circle cx="46" cy="23" r="7.5" fill="#ffe0bd" stroke="#5d4037" stroke-width="1.8" />
+              <path d="M38 48 C39 36, 53 36, 54 48" fill="#f48fb1" stroke="#880e4f" stroke-width="1.8" />
+              <path d="M43 21 L45.5 22.5 M49 21 L46.5 22.5" stroke="#5d4037" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M33 17 L40 13 L38 20 Z" fill="#ef5350" />
+              <circle cx="32" cy="14" r="2" fill="#ffca28" />
+            </svg>
+            <div>
+              <span class="font-display font-semibold text-[9.5px] text-pink-700 uppercase block leading-none">Kasus A</span>
+              <h3 class="font-display font-semibold text-[10.5px] text-navy leading-tight mt-0.5">SEKOLAH YANG TIDAK LAGI NYAMAN</h3>
+            </div>
+          </div>
+          <p class="text-[9.2px] leading-[1.35] text-slate-600 font-semibold">
+            Beberapa siswa sering mengejek dan mempermalukan seorang siswa di depan teman-temannya. Banyak teman lain mengetahui kejadian tersebut, tetapi memilih diam karena takut. Suasana sekolah menjadi tidak nyaman.
+          </p>
+        </article>
+
+        <!-- Kasus B -->
+        <article
+          class="case-card cursor-pointer bg-white rounded-xl border-2 border-slate-200 hover:border-navy/50 p-2 transition flex flex-col gap-1"
+          data-case="Kasus B: Sulit Mendapat Pekerjaan"
+          title="Klik untuk memilih Kasus B"
+        >
+          <div class="flex items-center gap-2">
+            <!-- Ilustrasi SVG Kasus B: Toko Tutup / PHK -->
+            <svg viewBox="0 0 64 64" class="w-11 h-11 flex-shrink-0" aria-label="Ilustrasi Toko Tutup dan Pengangguran">
+              <rect width="64" height="64" rx="12" fill="#e3f2fd" />
+              <rect x="11" y="20" width="42" height="31" rx="4" fill="#cfd8dc" stroke="#455a64" stroke-width="2" />
+              <path d="M9 20 L55 20 L50 12 L14 12 Z" fill="#ffab91" stroke="#bf360c" stroke-width="1.8" />
+              <line x1="11" y1="26" x2="53" y2="26" stroke="#90a4ae" stroke-width="1.5" />
+              <line x1="11" y1="45" x2="53" y2="45" stroke="#90a4ae" stroke-width="1.5" />
+              <rect x="18" y="29" width="28" height="13" rx="3" fill="#ffffff" stroke="#d32f2f" stroke-width="1.8" />
+              <text x="32" y="38.5" text-anchor="middle" font-size="7.5" font-weight="800" fill="#d32f2f" font-family="Nunito, sans-serif">TUTUP</text>
+            </svg>
+            <div>
+              <span class="font-display font-semibold text-[9.5px] text-blue-700 uppercase block leading-none">Kasus B</span>
+              <h3 class="font-display font-semibold text-[10.5px] text-navy leading-tight mt-0.5">SULIT MENDAPAT PEKERJAAN</h3>
+            </div>
+          </div>
+          <p class="text-[9.2px] leading-[1.35] text-slate-600 font-semibold">
+            Banyak warga kehilangan pekerjaan karena tempat usaha tutup. Mereka kesulitan memenuhi kebutuhan keluarga. Lapangan pekerjaan baru belum banyak tersedia.
+          </p>
+        </article>
+
+        <!-- Kasus C -->
+        <article
+          class="case-card cursor-pointer bg-white rounded-xl border-2 border-slate-200 hover:border-navy/50 p-2 transition flex flex-col gap-1"
+          data-case="Kasus C: Kota yang Semakin Padat"
+          title="Klik untuk memilih Kasus C"
+        >
+          <div class="flex items-center gap-2">
+            <!-- Ilustrasi SVG Kasus C: Kota Padat & Macet -->
+            <svg viewBox="0 0 64 64" class="w-11 h-11 flex-shrink-0" aria-label="Ilustrasi Kota Padat dan Macet">
+              <rect width="64" height="64" rx="12" fill="#e0f7ec" />
+              <!-- Gedung -->
+              <rect x="9" y="20" width="13" height="27" fill="#90a4ae" stroke="#37474f" stroke-width="1.6" />
+              <rect x="24" y="11" width="16" height="36" fill="#78909c" stroke="#37474f" stroke-width="1.6" />
+              <rect x="42" y="23" width="13" height="24" fill="#b0bec5" stroke="#37474f" stroke-width="1.6" />
+              <!-- Jendela -->
+              <rect x="28" y="16" width="3" height="3" fill="#fff8d6" />
+              <rect x="34" y="16" width="3" height="3" fill="#fff8d6" />
+              <rect x="28" y="23" width="3" height="3" fill="#fff8d6" />
+              <rect x="34" y="23" width="3" height="3" fill="#fff8d6" />
+              <!-- Mobil Macet -->
+              <rect x="10" y="45" width="18" height="8" rx="3" fill="#ffd54f" stroke="#5d4037" stroke-width="1.5" />
+              <circle cx="14" cy="53" r="2.2" fill="#263238" />
+              <circle cx="24" cy="53" r="2.2" fill="#263238" />
+              <rect x="34" y="46" width="19" height="8" rx="3" fill="#ef9a9a" stroke="#5d4037" stroke-width="1.5" />
+              <circle cx="38" cy="54" r="2.2" fill="#263238" />
+              <circle cx="49" cy="54" r="2.2" fill="#263238" />
+            </svg>
+            <div>
+              <span class="font-display font-semibold text-[9.5px] text-teal-700 uppercase block leading-none">Kasus C</span>
+              <h3 class="font-display font-semibold text-[10.5px] text-navy leading-tight mt-0.5">KOTA YANG SEMAKIN PADAT</h3>
+            </div>
+          </div>
+          <p class="text-[9.2px] leading-[1.35] text-slate-600 font-semibold">
+            Jumlah penduduk terus meningkat, tetapi fasilitas umum dan lapangan pekerjaan tidak berkembang secepatnya. Muncul kemacetan, kepadatan, dan persaingan kerja.
+          </p>
+        </article>
+      </div>
+
+      <!-- Kolom Kasus yang Dipilih -->
+      <div class="mt-2 bg-white rounded-xl px-3 py-1.5 border-2 border-dashed border-pyellowb flex flex-col sm:flex-row sm:items-center gap-1.5 text-[10.5px]">
+        <span class="font-extrabold text-navy whitespace-nowrap">🔎 Kasus yang dipilih:</span>
+        <input
+          type="text"
+          id="kasusDipilihInput"
+          data-key="kasus_dipilih"
+          placeholder="Klik salah satu kartu kasus di atas atau tulis di sini..."
+          class="dotted-input flex-1 w-full text-[10.5px]"
+        />
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- GRID 2 KOLOM: BAGIAN 3 (MISI 2) & BAGIAN 4+6 (MISI 3 & MISI 5)      -->
+    <!-- =================================================================== -->
+    <div class="grid grid-cols-1 md:grid-cols-[1.15fr_0.85fr] gap-2.5 items-stretch">
+
+      <!-- BAGIAN 3: MISI 2 – BONGKAR KASUS! -->
+      <section class="avoid-break rounded-2xl bg-ppink border-2 border-ppinkb px-3 py-2 flex flex-col justify-between gap-1.5">
+        <div class="flex items-center gap-2">
+          <span class="font-display font-semibold text-[10px] px-2.5 py-0.5 rounded-full bg-navy text-white">MISI 2</span>
+          <h2 class="font-display font-semibold text-[13px] text-navy">BONGKAR KASUS!</h2>
+        </div>
+
+        <div>
+          <label class="block text-[9.8px] font-extrabold text-slate-800 mb-0.5">1. Apa masalah sosial yang kalian temukan?</label>
+          <textarea rows="2" data-key="misi2_q1" class="lined-textarea rounded-lg border border-pink-200 px-2 py-1"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-[9.8px] font-extrabold text-slate-800 mb-0.5">2. Mengapa masalah tersebut dapat disebut sebagai masalah sosial?</label>
+          <textarea rows="2" data-key="misi2_q2" class="lined-textarea rounded-lg border border-pink-200 px-2 py-1"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-[9.8px] font-extrabold text-slate-800 mb-1">3. Apa faktor penyebab masalah tersebut? <span class="font-semibold text-pink-800">(Boleh memilih lebih dari satu)</span></label>
+          <div class="flex flex-wrap gap-1.5 mb-1 text-[9.5px] font-bold">
+            <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-pink-200 cursor-pointer"><input type="checkbox" data-key="f_ekonomi" class="accent-navy w-3 h-3" /> Ekonomi</label>
+            <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-pink-200 cursor-pointer"><input type="checkbox" data-key="f_budaya" class="accent-navy w-3 h-3" /> Budaya</label>
+            <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-pink-200 cursor-pointer"><input type="checkbox" data-key="f_biologis" class="accent-navy w-3 h-3" /> Biologis</label>
+            <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-pink-200 cursor-pointer"><input type="checkbox" data-key="f_psikologis" class="accent-navy w-3 h-3" /> Psikologis</label>
+            <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-pink-200 cursor-pointer"><input type="checkbox" data-key="f_sosial" class="accent-navy w-3 h-3" /> Sosial</label>
+          </div>
+          <label class="block text-[9.5px] font-extrabold text-pink-900 mb-0.5">Jelaskan alasan pilihan kalian!</label>
+          <textarea rows="2" data-key="misi2_q3_alasan" class="lined-textarea rounded-lg border border-pink-200 px-2 py-1"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-[9.8px] font-extrabold text-slate-800 mb-0.5">4. Siapa saja pihak yang terdampak oleh masalah tersebut?</label>
+          <textarea rows="1" data-key="misi2_q4" class="lined-textarea rounded-lg border border-pink-200 px-2 py-1"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-[9.8px] font-extrabold text-slate-800 mb-0.5">5. Apa dampak masalah tersebut?</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+            <div>
+              <label class="block text-[9px] font-extrabold text-pink-900 mb-0.5">Bagi individu:</label>
+              <textarea rows="2" data-key="misi2_q5_ind" class="lined-textarea rounded-lg border border-pink-200 px-2 py-1"></textarea>
+            </div>
+            <div>
+              <label class="block text-[9px] font-extrabold text-pink-900 mb-0.5">Bagi masyarakat:</label>
+              <textarea rows="2" data-key="misi2_q5_mas" class="lined-textarea rounded-lg border border-pink-200 px-2 py-1"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- KOLOM KANAN: BAGIAN 4 (MISI 3) & BAGIAN 6 (MISI 5) -->
+      <div class="flex flex-col gap-2.5">
+        <!-- BAGIAN 4: MISI 3 – SIAPA YANG HARUS BERTINDAK? -->
+        <section class="avoid-break rounded-2xl bg-pmint border-2 border-pmintb px-3 py-2">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="font-display font-semibold text-[10px] px-2.5 py-0.5 rounded-full bg-navy text-white">MISI 3</span>
+            <h2 class="font-display font-semibold text-[13px] text-navy">SIAPA YANG HARUS BERTINDAK?</h2>
+          </div>
+          <p class="text-[9px] font-bold text-teal-900 mb-1.5">
+            Jelaskan peran masing-masing pihak dalam membantu menyelesaikan masalah sosial yang dipilih!
+          </p>
+
+          <div class="overflow-hidden rounded-xl border border-pmintb bg-white">
+            <table class="w-full text-left border-collapse text-[9.8px]">
+              <thead>
+                <tr class="bg-teal-200/75 text-teal-950 font-display">
+                  <th class="py-1.5 px-2 w-[30%] border-b border-pmintb">Pihak</th>
+                  <th class="py-1.5 px-2 border-b border-pmintb">Peran yang dapat dilakukan</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-teal-100">
+                <tr>
+                  <td class="py-1.5 px-2 font-extrabold text-teal-900 bg-teal-50/60">Keluarga</td>
+                  <td class="py-1 px-2"><input type="text" data-key="peran_keluarga" class="dotted-input w-full text-[9.8px]" /></td>
+                </tr>
+                <tr>
+                  <td class="py-1.5 px-2 font-extrabold text-teal-900 bg-teal-50/60">Sekolah</td>
+                  <td class="py-1 px-2"><input type="text" data-key="peran_sekolah" class="dotted-input w-full text-[9.8px]" /></td>
+                </tr>
+                <tr>
+                  <td class="py-1.5 px-2 font-extrabold text-teal-900 bg-teal-50/60">Masyarakat</td>
+                  <td class="py-1 px-2"><input type="text" data-key="peran_masyarakat" class="dotted-input w-full text-[9.8px]" /></td>
+                </tr>
+                <tr>
+                  <td class="py-1.5 px-2 font-extrabold text-teal-900 bg-teal-50/60">Pemerintah</td>
+                  <td class="py-1 px-2"><input type="text" data-key="peran_pemerintah" class="dotted-input w-full text-[9.8px]" /></td>
+                </tr>
+                <tr>
+                  <td class="py-1.5 px-2 font-extrabold text-teal-900 bg-teal-50/60">Individu</td>
+                  <td class="py-1 px-2"><input type="text" data-key="peran_individu" class="dotted-input w-full text-[9.8px]" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- BAGIAN 6: MISI 5 – KALAU KAMU JADI... -->
+        <section class="avoid-break rounded-2xl bg-pblue border-2 border-pblueb px-3 py-2 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-display font-semibold text-[10px] px-2.5 py-0.5 rounded-full bg-navy text-white">MISI 5</span>
+              <h2 class="font-display font-semibold text-[13px] text-navy">KALAU KAMU JADI...</h2>
+            </div>
+            <p class="text-[9.5px] font-bold text-slate-800 mb-1">
+              Bayangkan kamu menjadi salah satu pihak berikut:
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-2 text-[9.2px] font-bold">
+              <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-pblueb cursor-pointer"><input type="checkbox" data-key="jadi_pemerintah" class="accent-navy w-3 h-3" /> Pemerintah</label>
+              <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-pblueb cursor-pointer"><input type="checkbox" data-key="jadi_guru" class="accent-navy w-3 h-3" /> Guru</label>
+              <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-pblueb cursor-pointer"><input type="checkbox" data-key="jadi_ortu" class="accent-navy w-3 h-3" /> Orang tua</label>
+              <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-pblueb cursor-pointer"><input type="checkbox" data-key="jadi_ketua_mas" class="accent-navy w-3 h-3" /> Ketua kelompok masyarakat</label>
+              <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-pblueb cursor-pointer"><input type="checkbox" data-key="jadi_osis" class="accent-navy w-3 h-3" /> Ketua OSIS</label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[9.6px] font-extrabold text-navy mb-0.5">
+              Apa tindakan pertama yang akan kamu lakukan untuk mengatasi masalah sosial tersebut?
+            </label>
+            <textarea rows="3" data-key="misi5_tindakan" class="lined-textarea rounded-lg border border-pblueb px-2 py-1"></textarea>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- BAGIAN 5: MISI 4 – JADI PEMECAH MASALAH!                            -->
+    <!-- =================================================================== -->
+    <section class="avoid-break rounded-2xl bg-ppeach border-2 border-ppeachb px-3 py-2">
+      <div class="flex flex-wrap items-center gap-2 mb-1.5">
+        <span class="font-display font-semibold text-[10px] px-2.5 py-0.5 rounded-full bg-navy text-white">MISI 4</span>
+        <!-- Ikon SVG Lampu Ide -->
+        <svg viewBox="0 0 32 32" class="w-6 h-6 flex-shrink-0" aria-label="Ikon Lampu Ide">
+          <circle cx="16" cy="14" r="9" fill="#ffd54f" stroke="#d84315" stroke-width="2" />
+          <path d="M13 14 Q16 10 19 14" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" />
+          <rect x="12" y="23" width="8" height="4.5" rx="1.5" fill="#90a4ae" stroke="#37474f" stroke-width="1.6" />
+          <line x1="16" y1="1.5" x2="16" y2="3.5" stroke="#d84315" stroke-width="2" stroke-linecap="round" />
+          <line x1="4" y1="14" x2="6" y2="14" stroke="#d84315" stroke-width="2" stroke-linecap="round" />
+          <line x1="26" y1="14" x2="28" y2="14" stroke="#d84315" stroke-width="2" stroke-linecap="round" />
+          <line x1="7.5" y1="5.5" x2="9" y2="7" stroke="#d84315" stroke-width="2" stroke-linecap="round" />
+          <line x1="24.5" y1="5.5" x2="23" y2="7" stroke="#d84315" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <h2 class="font-display font-semibold text-[13px] text-navy">
+          JADI PEMECAH MASALAH! — <span class="font-sans font-bold text-[10.5px] text-orange-950">Buatlah tiga solusi untuk menyelesaikan kasus yang telah kalian pilih!</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2">
+        <div class="bg-white rounded-xl border border-ppeachb p-2">
+          <div class="font-display font-semibold text-[10.5px] text-orange-700 mb-0.5">💡 Solusi 1</div>
+          <textarea rows="2" data-key="solusi_1" class="lined-textarea rounded border border-orange-100 px-1.5 py-0.5"></textarea>
+        </div>
+        <div class="bg-white rounded-xl border border-ppeachb p-2">
+          <div class="font-display font-semibold text-[10.5px] text-orange-700 mb-0.5">💡 Solusi 2</div>
+          <textarea rows="2" data-key="solusi_2" class="lined-textarea rounded border border-orange-100 px-1.5 py-0.5"></textarea>
+        </div>
+        <div class="bg-white rounded-xl border border-ppeachb p-2">
+          <div class="font-display font-semibold text-[10.5px] text-orange-700 mb-0.5">💡 Solusi 3</div>
+          <textarea rows="2" data-key="solusi_3" class="lined-textarea rounded border border-orange-100 px-1.5 py-0.5"></textarea>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl border-2 border-dashed border-ppeachb px-3 py-1.5 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-[10px]">
+        <label class="flex flex-col gap-0.5">
+          <span class="font-extrabold text-orange-900">⭐ Solusi terbaik menurut kelompok kami:</span>
+          <input type="text" data-key="solusi_terbaik" class="dotted-input w-full text-[10px]" />
+        </label>
+        <label class="flex flex-col gap-0.5">
+          <span class="font-extrabold text-orange-900">📝 Alasannya:</span>
+          <input type="text" data-key="solusi_alasan" class="dotted-input w-full text-[10px]" />
+        </label>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- GRID 2 KOLOM: BAGIAN 7 (MISI 6) & BAGIAN 8 (TANTANGAN BONUS)        -->
+    <!-- =================================================================== -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 items-stretch">
+
+      <!-- BAGIAN 7: MISI 6 – PRESENTASI 3 MENIT! -->
+      <section class="avoid-break rounded-2xl bg-plavender border-2 border-plavenderb px-3 py-2 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="font-display font-semibold text-[10px] px-2.5 py-0.5 rounded-full bg-navy text-white">MISI 6</span>
+            <h2 class="font-display font-semibold text-[13px] text-navy">PRESENTASI 3 MENIT!</h2>
+          </div>
+          <p class="text-[9.2px] font-bold text-purple-950 mb-1.5">
+            Presentasikan hasil penyelidikan kelompok kalian dengan urutan berikut:
+          </p>
+
+          <!-- Urutan Presentasi Berpanah -->
+          <div class="flex flex-wrap items-center gap-1 mb-2">
+            <span class="px-2 py-0.5 rounded-full bg-white border border-plavenderb text-purple-900 text-[9px] font-extrabold">1. Masalah</span>
+            <span class="text-purple-700 font-black text-[10px]">➜</span>
+            <span class="px-2 py-0.5 rounded-full bg-white border border-plavenderb text-purple-900 text-[9px] font-extrabold">2. Penyebab</span>
+            <span class="text-purple-700 font-black text-[10px]">➜</span>
+            <span class="px-2 py-0.5 rounded-full bg-white border border-plavenderb text-purple-900 text-[9px] font-extrabold">3. Dampak</span>
+            <span class="text-purple-700 font-black text-[10px]">➜</span>
+            <span class="px-2 py-0.5 rounded-full bg-white border border-plavenderb text-purple-900 text-[9px] font-extrabold">4. Pihak Terkait</span>
+            <span class="text-purple-700 font-black text-[10px]">➜</span>
+            <span class="px-2 py-0.5 rounded-full bg-white border border-plavenderb text-purple-900 text-[9px] font-extrabold">5. Solusi</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-[1fr_72px] gap-2 items-center">
+          <div>
+            <p class="text-[9.2px] font-extrabold text-purple-950 mb-1">Alternatif bentuk presentasi:</p>
+            <div class="flex flex-wrap gap-1.5 text-[9.2px] font-bold">
+              <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-plavenderb cursor-pointer"><input type="checkbox" data-key="pres_poster" class="accent-navy w-3 h-3" /> Poster</label>
+              <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-plavenderb cursor-pointer"><input type="checkbox" data-key="pres_mindmap" class="accent-navy w-3 h-3" /> Mind Map</label>
+              <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-plavenderb cursor-pointer"><input type="checkbox" data-key="pres_roleplay" class="accent-navy w-3 h-3" /> Role Play</label>
+              <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-plavenderb cursor-pointer"><input type="checkbox" data-key="pres_berita" class="accent-navy w-3 h-3" /> Berita Singkat</label>
+              <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-plavenderb cursor-pointer"><input type="checkbox" data-key="pres_talkshow" class="accent-navy w-3 h-3" /> Talk Show</label>
+              <label class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-lg border border-plavenderb cursor-pointer"><input type="checkbox" data-key="pres_kampanye" class="accent-navy w-3 h-3" /> Kampanye Sosial</label>
+            </div>
+          </div>
+
+          <!-- Ilustrasi SVG Kegiatan Presentasi Kelompok -->
+          <svg viewBox="0 0 84 84" class="w-[72px] h-[72px]" aria-label="Ilustrasi Presentasi Kelompok">
+            <rect x="6" y="10" width="44" height="32" rx="5" fill="#ffffff" stroke="#7e57c2" stroke-width="2.5" />
+            <line x1="13" y1="19" x2="40" y2="19" stroke="#b39ddb" stroke-width="3" stroke-linecap="round" />
+            <line x1="13" y1="26" x2="34" y2="26" stroke="#90caf9" stroke-width="3" stroke-linecap="round" />
+            <line x1="13" y1="33" x2="28" y2="33" stroke="#80cbc4" stroke-width="3" stroke-linecap="round" />
+            <line x1="28" y1="42" x2="28" y2="58" stroke="#7e57c2" stroke-width="2.5" />
+            <line x1="20" y1="58" x2="36" y2="58" stroke="#7e57c2" stroke-width="2.5" stroke-linecap="round" />
+            <!-- Siswa Presentasi -->
+            <circle cx="60" cy="30" r="9.5" fill="#ffe0bd" stroke="#5d4037" stroke-width="2" />
+            <circle cx="57" cy="29" r="1.3" fill="#263238" />
+            <circle cx="63" cy="29" r="1.3" fill="#263238" />
+            <path d="M57 34 Q60 36.5 63 34" fill="none" stroke="#5d4037" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M47 68 C48 48, 72 48, 73 68 Z" fill="#ffd54f" stroke="#5d4037" stroke-width="2" />
+            <line x1="50" y1="46" x2="38" y2="33" stroke="#5d4037" stroke-width="2.5" stroke-linecap="round" />
+          </svg>
+        </div>
+      </section>
+
+      <!-- BAGIAN 8: TANTANGAN BONUS – MASALAH SOSIAL ATAU BUKAN? -->
+      <section class="avoid-break rounded-2xl bg-pyellow border-2 border-pyellowb px-3 py-2">
+        <div class="flex items-center gap-2 mb-1.5">
+          <span class="font-display font-semibold text-[10px] px-2.5 py-0.5 rounded-full bg-navy text-white">BONUS</span>
+          <h2 class="font-display font-semibold text-[12.5px] text-navy">TANTANGAN BONUS – MASALAH SOSIAL ATAU BUKAN?</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[9.2px]">
+          <!-- Situasi 1 -->
+          <div class="bg-white rounded-xl border border-pyellowb p-2 flex flex-col justify-between gap-1">
+            <p class="font-bold text-slate-800 leading-snug">1. Seorang siswa lupa membawa tugas.</p>
+            <div class="flex items-center gap-2 font-extrabold text-navy">
+              <span>Masalah sosial?</span>
+              <label class="inline-flex items-center gap-0.5 cursor-pointer"><input type="radio" name="b1" value="ya" data-key="b1" class="accent-navy" /> Ya</label>
+              <label class="inline-flex items-center gap-0.5 cursor-pointer"><input type="radio" name="b1" value="tidak" data-key="b1" class="accent-navy" /> Tidak</label>
+            </div>
+            <label class="flex items-baseline gap-1 font-bold text-slate-700">Alasan: <input type="text" data-key="b1_alasan" class="dotted-input flex-1 w-full text-[9.2px]" /></label>
+          </div>
+
+          <!-- Situasi 2 -->
+          <div class="bg-white rounded-xl border border-pyellowb p-2 flex flex-col justify-between gap-1">
+            <p class="font-bold text-slate-800 leading-snug">2. Banyak siswa melakukan bullying sehingga lingkungan sekolah menjadi tidak aman.</p>
+            <div class="flex items-center gap-2 font-extrabold text-navy">
+              <span>Masalah sosial?</span>
+              <label class="inline-flex items-center gap-0.5 cursor-pointer"><input type="radio" name="b2" value="ya" data-key="b2" class="accent-navy" /> Ya</label>
+              <label class="inline-flex items-center gap-0.5 cursor-pointer"><input type="radio" name="b2" value="tidak" data-key="b2" class="accent-navy" /> Tidak</label>
+            </div>
+            <label class="flex items-baseline gap-1 font-bold text-slate-700">Alasan: <input type="text" data-key="b2_alasan" class="dotted-input flex-1 w-full text-[9.2px]" /></label>
+          </div>
+
+          <!-- Situasi 3 -->
+          <div class="bg-white rounded-xl border border-pyellowb p-2 flex flex-col justify-between gap-1">
+            <p class="font-bold text-slate-800 leading-snug">3. Satu keluarga kehilangan pekerjaan.</p>
+            <div class="flex items-center gap-2 font-extrabold text-navy">
+              <span>Masalah sosial?</span>
+              <label class="inline-flex items-center gap-0.5 cursor-pointer"><input type="radio" name="b3" value="ya" data-key="b3" class="accent-navy" /> Ya</label>
+              <label class="inline-flex items-center gap-0.5 cursor-pointer"><input type="radio" name="b3" value="tidak" data-key="b3" class="accent-navy" /> Tidak</label>
+            </div>
+            <label class="flex items-baseline gap-1 font-bold text-slate-700">Alasan: <input type="text" data-key="b3_alasan" class="dotted-input flex-1 w-full text-[9.2px]" /></label>
+          </div>
+
+          <!-- Situasi 4 -->
+          <div class="bg-white rounded-xl border border-pyellowb p-2 flex flex-col justify-between gap-1">
+            <p class="font-bold text-slate-800 leading-snug">4. Angka pengangguran di suatu daerah meningkat sehingga banyak keluarga kesulitan memenuhi kebutuhan.</p>
+            <div class="flex items-center gap-2 font-extrabold text-navy">
+              <span>Masalah sosial?</span>
+              <label class="inline-flex items-center gap-0.5 cursor-pointer"><input type="radio" name="b4" value="ya" data-key="b4" class="accent-navy" /> Ya</label>
+              <label class="inline-flex items-center gap-0.5 cursor-pointer"><input type="radio" name="b4" value="tidak" data-key="b4" class="accent-navy" /> Tidak</label>
+            </div>
+            <label class="flex items-baseline gap-1 font-bold text-slate-700">Alasan: <input type="text" data-key="b4_alasan" class="dotted-input flex-1 w-full text-[9.2px]" /></label>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- BAGIAN 9: REFLEKSI INDIVIDU                                         -->
+    <!-- =================================================================== -->
+    <section class="avoid-break rounded-2xl bg-ppink border-2 border-ppinkb px-3 py-2">
+      <div class="flex items-center gap-2 mb-1.5">
+        <span class="font-display font-semibold text-[10px] px-2.5 py-0.5 rounded-full bg-navy text-white">BAGIAN 9</span>
+        <h2 class="font-display font-semibold text-[13px] text-navy">REFLEKSI INDIVIDU</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_72px] gap-2.5 items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+          <div class="bg-white rounded-xl border border-ppinkb p-2">
+            <label class="block text-[9.2px] font-extrabold text-pink-800 mb-0.5">1. Hal baru yang saya pahami adalah...</label>
+            <textarea rows="2" data-key="ref_1" class="lined-textarea rounded border border-pink-100 px-1.5 py-0.5"></textarea>
+          </div>
+          <div class="bg-white rounded-xl border border-ppinkb p-2">
+            <label class="block text-[9.2px] font-extrabold text-pink-800 mb-0.5">2. Masalah sosial yang paling menarik perhatian saya adalah...</label>
+            <textarea rows="2" data-key="ref_2" class="lined-textarea rounded border border-pink-100 px-1.5 py-0.5"></textarea>
+          </div>
+          <div class="bg-white rounded-xl border border-ppinkb p-2">
+            <label class="block text-[9.2px] font-extrabold text-pink-800 mb-0.5">3. Menurut saya, peran pelajar dalam menghadapi masalah sosial adalah...</label>
+            <textarea rows="2" data-key="ref_3" class="lined-textarea rounded border border-pink-100 px-1.5 py-0.5"></textarea>
+          </div>
+          <div class="bg-white rounded-xl border border-ppinkb p-2">
+            <label class="block text-[9.2px] font-extrabold text-pink-800 mb-0.5">4. Satu tindakan sederhana yang bisa saya lakukan untuk mengatasi masalah sosial adalah...</label>
+            <textarea rows="2" data-key="ref_4" class="lined-textarea rounded border border-pink-100 px-1.5 py-0.5"></textarea>
+          </div>
+        </div>
+
+        <!-- Ilustrasi SVG Peserta Didik Sedang Berpikir & Menulis -->
+        <div class="flex justify-center">
+          <svg viewBox="0 0 80 96" class="w-[68px] h-[82px]" aria-label="Ilustrasi Peserta Didik Sedang Berpikir dan Menulis">
+            <!-- Gelembung Pikiran -->
+            <circle cx="58" cy="14" r="7.5" fill="#fff8d6" stroke="#f48fb1" stroke-width="2" />
+            <circle cx="47" cy="24" r="3" fill="#fff8d6" stroke="#f48fb1" stroke-width="1.5" />
+            <text x="58" y="17.5" text-anchor="middle" font-size="9" font-weight="800" fill="#d81b60">?</text>
+            <!-- Kepala & Rambut -->
+            <circle cx="34" cy="37" r="14" fill="#ffe0bd" stroke="#5d4037" stroke-width="2" />
+            <path d="M20 34 C22 19, 46 19, 48 34 C42 28, 26 28, 20 34 Z" fill="#3e2723" />
+            <circle cx="29" cy="37" r="1.8" fill="#263238" />
+            <circle cx="39" cy="37" r="1.8" fill="#263238" />
+            <path d="M30 44 Q34 47 38 44" fill="none" stroke="#5d4037" stroke-width="1.8" stroke-linecap="round" />
+            <!-- Badan -->
+            <path d="M16 74 C18 54, 50 54, 52 74 Z" fill="#80cbc4" stroke="#00695c" stroke-width="2" />
+            <!-- Buku & Pensil -->
+            <rect x="14" y="70" width="44" height="17" rx="3" fill="#ffffff" stroke="#1e3a5f" stroke-width="2" />
+            <line x1="36" y1="70" x2="36" y2="87" stroke="#90caf9" stroke-width="2" />
+            <line x1="20" y1="76" x2="31" y2="76" stroke="#cfd8dc" stroke-width="1.5" />
+            <line x1="20" y1="81" x2="31" y2="81" stroke="#cfd8dc" stroke-width="1.5" />
+            <line x1="53" y1="62" x2="66" y2="75" stroke="#ffd54f" stroke-width="4.5" stroke-linecap="round" />
+            <polygon points="51,60 55,61 52,64" fill="#5d4037" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- BAGIAN 10: KESIMPULAN & MOTTO                                       -->
+    <!-- =================================================================== -->
+    <section class="avoid-break rounded-2xl border-2 border-pblueb px-3 py-2 bg-gradient-to-r from-pblue to-pmint">
+      <div class="flex items-center gap-2 mb-1.5">
+        <span class="font-display font-semibold text-[10px] px-2.5 py-0.5 rounded-full bg-navy text-white">BAGIAN 10</span>
+        <h2 class="font-display font-semibold text-[13px] text-navy">KESIMPULAN</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2">
+        <div class="bg-white rounded-xl border border-pblueb p-2">
+          <label class="block text-[9.5px] font-extrabold text-navy mb-0.5">Masalah sosial adalah...</label>
+          <textarea rows="2" data-key="simp_1" class="lined-textarea rounded border border-slate-100 px-1.5 py-0.5"></textarea>
+        </div>
+        <div class="bg-white rounded-xl border border-pblueb p-2">
+          <label class="block text-[9.5px] font-extrabold text-navy mb-0.5">Masalah sosial dapat terjadi karena...</label>
+          <textarea rows="2" data-key="simp_2" class="lined-textarea rounded border border-slate-100 px-1.5 py-0.5"></textarea>
+        </div>
+        <div class="bg-white rounded-xl border border-pblueb p-2">
+          <label class="block text-[9.5px] font-extrabold text-navy mb-0.5">Untuk mengatasinya diperlukan...</label>
+          <textarea rows="2" data-key="simp_3" class="lined-textarea rounded border border-slate-100 px-1.5 py-0.5"></textarea>
+        </div>
+      </div>
+
+      <div class="bg-navy text-pyellow rounded-xl py-1.5 px-4 text-center font-display font-semibold text-xs sm:text-[13px] tracking-wide shadow-sm">
+        ✨ "Jangan hanya menemukan masalah. Jadilah bagian dari solusi!" ✨
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL KONFIRMASI RESET (Pengganti confirm() bawaan browser)           -->
+  <!-- ===================================================================== -->
+  <div id="resetModal" class="no-print fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/45 backdrop-blur-xs p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-5 shadow-2xl border border-slate-200">
+      <div class="flex items-center gap-2.5 mb-2">
+        <span class="w-9 h-9 rounded-xl bg-ppink text-pink-700 flex items-center justify-center text-lg">🔄</span>
+        <h3 class="font-display font-bold text-base text-navy">Reset Semua Jawaban?</h3>
+      </div>
+      <p class="text-xs text-slate-600 font-semibold leading-relaxed mb-4">
+        Semua jawaban yang sudah diketik dan dicentang pada LKPD ini akan dihapus dari browser. Tindakan ini tidak dapat dibatalkan.
+      </p>
+      <div class="flex justify-end gap-2">
+        <button type="button" id="cancelResetBtn" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs cursor-pointer">
+          Batal
+        </button>
+        <button type="button" id="confirmResetBtn" class="px-3.5 py-2 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs cursor-pointer">
+          Ya, Hapus Semua
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- NOTIFIKASI TOAST (Pengganti alert() bawaan browser)                   -->
+  <!-- ===================================================================== -->
+  <div id="toast" class="no-print fixed bottom-5 right-5 z-50 hidden bg-navy text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-lg border border-slate-700 transition">
+    Notifikasi
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- LOGIKA INTERAKTIF: LOCALSTORAGE, PILIH KASUS, UNDUH HTML, CETAK       -->
+  <!-- ===================================================================== -->
+  <script>
+    (function () {
+      const STORAGE_KEY = 'lkpd_sosiologi_detektif_v2';
+      const formContainer = document.getElementById('lkpdForm');
+      const saveStatus = document.getElementById('saveStatus');
+      const resetModal = document.getElementById('resetModal');
+      const toastEl = document.getElementById('toast');
+      const kasusInput = document.getElementById('kasusDipilihInput');
+      const caseCards = document.querySelectorAll('.case-card');
+
+      let toastTimer = null;
+
+      /** Menampilkan pesan notifikasi toast singkat */
+      function showToast(message) {
+        if (!toastEl) return;
+        toastEl.textContent = message;
+        toastEl.classList.remove('hidden');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toastEl.classList.add('hidden');
+        }, 2800);
+      }
+
+      /** Menyorot kartu kasus yang cocok dengan teks isian */
+      function syncCaseHighlight() {
+        const currentVal = (kasusInput.value || '').trim().toLowerCase();
+        caseCards.forEach((card) => {
+          const cardTitle = (card.getAttribute('data-case') || '').toLowerCase();
+          if (currentVal && (currentVal === cardTitle || currentVal.includes(cardTitle.split(':')[0]))) {
+            card.classList.add('case-card-active');
+          } else {
+            card.classList.remove('case-card-active');
+          }
+        });
+      }
+
+      /** Menyimpan seluruh input pengguna ke localStorage */
+      function saveData() {
+        try {
+          const data = {};
+          document.querySelectorAll('[data-key]').forEach((el) => {
+            const key = el.getAttribute('data-key');
+            if (el.type === 'checkbox') {
+              data[key] = el.checked;
+            } else if (el.type === 'radio') {
+              if (el.checked) data[key] = el.value;
+            } else {
+              data[key] = el.value;
+            }
+          });
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+          if (saveStatus) {
+            const now = new Date();
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            saveStatus.textContent = `✓ Tersimpan otomatis pukul ${hh}:${mm}`;
+          }
+        } catch (err) {
+          console.error('Gagal menyimpan ke localStorage:', err);
+        }
+      }
+
+      /** Memuat kembali jawaban tersimpan dari localStorage */
+      function loadData() {
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (!saved) return;
+          const data = JSON.parse(saved);
+          document.querySelectorAll('[data-key]').forEach((el) => {
+            const key = el.getAttribute('data-key');
+            if (!(key in data)) return;
+            if (el.type === 'checkbox') {
+              el.checked = Boolean(data[key]);
+            } else if (el.type === 'radio') {
+              el.checked = el.value === data[key];
+            } else {
+              el.value = data[key];
+            }
+          });
+          syncCaseHighlight();
+        } catch (err) {
+          console.error('Gagal memuat data dari localStorage:', err);
+        }
+      }
+
+      /** Mengunduh file index.html bersih agar langsung siap diunggah ke GitHub */
+      function downloadIndexHtml() {
+        try {
+          const docClone = document.documentElement.cloneNode(true);
+
+          // Pastikan modal & toast dalam kondisi tersembunyi di file hasil unduhan
+          const clonedModal = docClone.querySelector('#resetModal');
+          if (clonedModal) {
+            clonedModal.classList.add('hidden');
+            clonedModal.classList.remove('flex');
+          }
+          const clonedToast = docClone.querySelector('#toast');
+          if (clonedToast) {
+            clonedToast.classList.add('hidden');
+          }
+
+          // Bersihkan nilai input sementara pada file unduhan agar file GitHub bersih untuk siswa baru
+          docClone.querySelectorAll('[data-key]').forEach((el) => {
+            if (el.type === 'checkbox' || el.type === 'radio') {
+              el.removeAttribute('checked');
+            } else if (el.tagName === 'TEXTAREA') {
+              el.textContent = '';
+            } else {
+              el.removeAttribute('value');
+            }
+          });
+
+          const htmlContent = '<!DOCTYPE html>\n' + docClone.outerHTML;
+          const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'index.html';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+
+          showToast('⬇️ File index.html berhasil diunduh! Siap diunggah ke GitHub.');
+        } catch (err) {
+          console.error('Gagal mengunduh file:', err);
+          showToast('⚠️ Gagal mengunduh file. Silakan coba lagi.');
+        }
+      }
+
+      /** Membuka dan menutup modal konfirmasi reset */
+      function openResetModal() {
+        resetModal.classList.remove('hidden');
+        resetModal.classList.add('flex');
+      }
+
+      function closeResetModal() {
+        resetModal.classList.add('hidden');
+        resetModal.classList.remove('flex');
+      }
+
+      function executeReset() {
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+          document.querySelectorAll('[data-key]').forEach((el) => {
+            if (el.type === 'checkbox' || el.type === 'radio') {
+              el.checked = false;
+            } else {
+              el.value = '';
+            }
+          });
+          syncCaseHighlight();
+          closeResetModal();
+          if (saveStatus) {
+            saveStatus.textContent = '✓ Semua jawaban telah dikosongkan';
+          }
+          showToast('🔄 Semua jawaban berhasil direset.');
+        } catch (err) {
+          console.error('Gagal mereset form:', err);
+        }
+      }
+
+      // Event Listeners
+      document.addEventListener('DOMContentLoaded', () => {
+        loadData();
+
+        formContainer.addEventListener('input', () => {
+          syncCaseHighlight();
+          saveData();
+        });
+        formContainer.addEventListener('change', saveData);
+
+        // Klik kartu kasus pada Misi 1 untuk langsung memilih kasus
+        caseCards.forEach((card) => {
+          card.addEventListener('click', () => {
+            const chosen = card.getAttribute('data-case');
+            if (kasusInput && chosen) {
+              kasusInput.value = chosen;
+              syncCaseHighlight();
+              saveData();
+              showToast(`🔎 ${chosen} dipilih!`);
+            }
+          });
+        });
+
+        // Tombol Toolbar
+        document.getElementById('btnDownload').addEventListener('click', downloadIndexHtml);
+        document.getElementById('btnPrint').addEventListener('click', () => window.print());
+        document.getElementById('btnReset').addEventListener('click', openResetModal);
+
+        // Tombol Modal Reset
+        document.getElementById('cancelResetBtn').addEventListener('click', closeResetModal);
+        document.getElementById('confirmResetBtn').addEventListener('click', executeReset);
+        resetModal.addEventListener('click', (e) => {
+          if (e.target === resetModal) closeResetModal();
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
